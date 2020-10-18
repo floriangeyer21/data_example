@@ -3,6 +3,7 @@ package com.data.example.data_example.bootstrap;
 import com.data.example.data_example.model.Tweet;
 import com.data.example.data_example.model.Group;
 import com.data.example.data_example.model.User;
+import com.data.example.data_example.model.UserProfile;
 import com.data.example.data_example.repositories.TweetRepository;
 import com.data.example.data_example.repositories.GroupRepository;
 import com.data.example.data_example.repositories.UserRepository;
@@ -11,6 +12,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Log4j2
 @Component
@@ -43,6 +46,10 @@ public class BootstrapData implements CommandLineRunner {
         tweet.setState("New Jersey");
         tweet.setPassword("1234");
         tweet.setUser(alice);
+        UserProfile userProfile = new UserProfile(
+                UUID.fromString(alice.getId().toString()),
+                alice.getFirstName(),
+                alice.getLastName());
 
         alice.getTweets().add(tweet);
 
@@ -53,5 +60,6 @@ public class BootstrapData implements CommandLineRunner {
         log.info("Count of tweet = " + tweetRepository.count());
         log.info("count of groups = " + groupRepository.count());
         log.info("Tweets size for user alice = " + userRepository.findById(1L).get().getTweets().size());
+        log.info(userRepository.findAll());
     }
 }

@@ -5,6 +5,7 @@ import com.data.example.data_example.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,9 @@ public class UserService {
         return user.orElseGet(User::new);
     }
 
-    public Iterable<User> getAll() {
-        return userRepository.findAll();
+    public List<User> getAll() {
+        List<User> users = new ArrayList<>();
+        userRepository.findAll().forEach(users::add);
+        return users;
     }
 }
