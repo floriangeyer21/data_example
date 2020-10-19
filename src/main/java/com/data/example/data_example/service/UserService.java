@@ -25,7 +25,23 @@ public class UserService {
 
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
-        userRepository.findAll().forEach(users::add);
+        users.add(userRepository.findById(1L).get());
         return users;
+    }
+
+    public Long count() {
+        return userRepository.count();
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public User update(User user) {
+        return userRepository.save(user);
     }
 }

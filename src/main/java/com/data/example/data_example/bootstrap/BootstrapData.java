@@ -46,10 +46,6 @@ public class BootstrapData implements CommandLineRunner {
         tweet.setState("New Jersey");
         tweet.setPassword("1234");
         tweet.setUser(alice);
-        UserProfile userProfile = new UserProfile(
-                UUID.fromString(alice.getId().toString()),
-                alice.getFirstName(),
-                alice.getLastName());
 
         alice.getTweets().add(tweet);
 
